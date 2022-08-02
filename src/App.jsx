@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
-import { useLocalStorage } from './hooks';
 import { nanoid } from 'nanoid';
+import { useLocalStorage } from './hooks';
 import defaultContacts from './data/defaultContacts.json';
 import { Container } from './components/Container';
 import { ContactForm } from './components/ContactForm';
@@ -8,7 +8,7 @@ import { ContactList } from './components/ContactsList';
 import { Filter } from './components/Filter';
 
 export const App = () => {
-  const [contacts, setContacts] = useLocalStorage('contact', defaultContacts);
+  const [contacts, setContacts] = useLocalStorage('contacts', defaultContacts);
   const [filter, setFilter] = useState('');
 
   const deleteContact = contactId => {
