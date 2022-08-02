@@ -6,6 +6,7 @@ import { Container } from './components/Container';
 import { ContactForm } from './components/ContactForm';
 import { ContactList } from './components/ContactsList';
 import { Filter } from './components/Filter';
+import { useMemo } from 'react';
 
 export const App = () => {
   const [contacts, setContacts] = useLocalStorage('contact', defaultContacts);
@@ -33,13 +34,13 @@ export const App = () => {
     setFilter(e.currentTarget.value);
   };
 
-  const getVisibleContacts = () => {
-    const normolizeFilter = filter.toLowerCase();
-
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normolizeFilter)
-    );
-  };
+  const getVisibleContacts = useMemo(
+    () =>
+      contacts.filter(contact =>
+        contact.name.toLowerCase().includes(filter.toLowerCase())
+      ),
+    [contacts, filter]
+  );
 
   return (
     <Container>
@@ -48,7 +49,7 @@ export const App = () => {
       <h2>Contacts</h2>
       <Filter value={filter} onChange={changeFilter} />
       <ContactList
-        contacts={getVisibleContacts()}
+        contacts={getVisibleContacts}
         onDeleteContact={deleteContact}
       />
     </Container>
