@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useLocalStorage } from './hooks';
 import { nanoid } from 'nanoid';
 import defaultContacts from './data/defaultContacts.json';
@@ -6,7 +6,6 @@ import { Container } from './components/Container';
 import { ContactForm } from './components/ContactForm';
 import { ContactList } from './components/ContactsList';
 import { Filter } from './components/Filter';
-import { useMemo } from 'react';
 
 export const App = () => {
   const [contacts, setContacts] = useLocalStorage('contact', defaultContacts);
