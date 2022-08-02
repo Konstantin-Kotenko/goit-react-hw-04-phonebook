@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import {
@@ -35,33 +34,31 @@ const schema = yup.object().shape({
     ),
 });
 
-export class ContactForm extends Component {
-  handleSubmit = (values, { resetForm }) => {
-    this.props.onSubmit(values);
+export const ContactForm = ({ onSubmit }) => {
+  const handleSubmit = (values, { resetForm }) => {
+    onSubmit(values);
     resetForm();
   };
 
-  render() {
-    return (
-      <Formik
-        initialValues={{ name: '', number: '' }}
-        onSubmit={this.handleSubmit}
-        validationSchema={schema}
-      >
-        <FormContact>
-          <Label>
-            Name
-            <Input type="text" name="name" />
-            <FormError name="name" />
-          </Label>
-          <Label>
-            Number
-            <Input type="tel" name="number" />
-            <FormError name="number" />
-          </Label>
-          <Button type="submit">Add contact</Button>
-        </FormContact>
-      </Formik>
-    );
-  }
-}
+  return (
+    <Formik
+      initialValues={{ name: '', number: '' }}
+      onSubmit={handleSubmit}
+      validationSchema={schema}
+    >
+      <FormContact>
+        <Label>
+          Name
+          <Input type="text" name="name" />
+          <FormError name="name" />
+        </Label>
+        <Label>
+          Number
+          <Input type="tel" name="number" />
+          <FormError name="number" />
+        </Label>
+        <Button type="submit">Add contact</Button>
+      </FormContact>
+    </Formik>
+  );
+};
